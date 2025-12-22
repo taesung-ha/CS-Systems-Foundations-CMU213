@@ -1,8 +1,8 @@
-# Computer Systems Foundations [(CMU 15-213)](https://www.youtube.com/watch?v=cEFXuhPm65k&list=PLtv4PQFH2yMas_SCMTEaE4eUIWWWiwISj)
+# Computer Systems Foundations (CMU 15-213)
 ### Understanding the Hardware-Software Interface
 
 ## Overview
-This repository is dedicated to my study of **CMU 15-213: Introduction to Computer Systems (CSAPP)**. The goal is to master how computer systems execute programs, store information, and communicate. 
+This repository is dedicated to my study of **CMU 15-213: Introduction to Computer Systems [(CSAPP)](https://www.youtube.com/watch?v=cEFXuhPm65k&list=PLtv4PQFH2yMas_SCMTEaE4eUIWWWiwISj)**. The goal is to master how computer systems execute programs, store information, and communicate. 
 
 For a student with a background in statistics, this course provides the essential hardware-level context required to optimize high-performance data processing and understand memory-level constraints in large-scale computing.
 
