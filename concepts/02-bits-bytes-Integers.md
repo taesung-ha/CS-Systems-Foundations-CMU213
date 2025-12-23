@@ -5,8 +5,6 @@ The lecture material I reviewed covers the fundamental building blocks of comput
 ## 1. The Founders of Computer Fundamentals: George Boole and Claude Shannon
 The lecture explains why computers rely on binary (0 and 1). I found that this concept is deeply rooted in the work of mathematician George Boole and Claude Shannon, the father of information theory.
 
-![A stylized portrait image of two historical figures: George Boole holding an algebra book and Claude Shannon sitting beside an early digital circuit diagram, illustrating the link between Boolean logic and information theory.](2122779229)
-
 ### A. George Boole and Boolean Algebra
 
 - Background: George Boole, a 19th-century English mathematician, aimed to encode 'propositional logic' into a mathematical form, specifically Algebra.
@@ -27,8 +25,6 @@ The lecture explains why computers rely on binary (0 and 1). I found that this c
 ## 2. Why Do Modern Computers Use Binary?
 The lecture materials contrast modern binary systems with the early use of decimal systems in large-scale computers to explain why 0s and 1s became the standard. 
 
-![A side-by-side comparison of ENIAC using large vacuum tubes for decimal encoding and a modern computer chip using tiny transistors for binary encoding, highlighting the complexity difference.](789630005)
-
 ### A. The ENIAC Decimal Approach
 
 - ENIAC (Electronic Numerical Integrator and Computer): Developed in the 1940s, ENIAC was one of the first large-scale electronic computers.
@@ -46,8 +42,6 @@ The lecture materials contrast modern binary systems with the early use of decim
 
 ## 3. Understanding the CMU 15-213 Course Context
 This lecture material is part of Carnegie Mellon University's famous computer science course, '15-213: Introduction to Computer Systems.' Understanding this context helps me see why learning about 'bits' and 'bytes' is necessary.
-
-![A visual representation of the CMU 15-213 course structure, showing foundational layers \(Bits & Bytes, Data Types\) leading up to system-level programming and optimization.](1018095531)
 
 ### A. 15-213 Course Goal and Importance
 
@@ -69,8 +63,6 @@ The course is based on the C language, but it's not just about syntax; it asks f
 The professor mentioned 'Cygwin' for Windows users to complete the labs. I need to know what it is, as it's critical for setting up the required environment.
 
 ### A. Cygwin's Role
-
-![A diagram showing Cygwin as a compatibility layer between the Windows Kernel and Unix-like applications, including GCC and a Bash terminal.](213704199)
 
 ```mermaid
 graph TD
