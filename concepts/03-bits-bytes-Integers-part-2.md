@@ -1,0 +1,34 @@
+# [Summary] 03 Bits, Bytes, & Integers II
+
+## 1. Conversions and Bit-Level Operations
+- <strong>Implicit Casting in C</strong>: When an operation involves both `signed` and `unsigned` operands, C implicitly converts the signed value to unsigned. This can lead to non-intuitive results in comparisons (e.g., `-1 < 0U` evaluates to `false` because `-1` becomes `UMax`). <doc-source-group><doc-source requestId="32c449cf-04a7-4731-9ff8-92ce3a54646f" index="57" /></doc-source-group>
+- <strong>Sign Extension</strong>: To convert a smaller bit-width to a larger one (e.g., `short` to `int`) while preserving the value, the most significant bit (sign bit) is copied into the new positions. <doc-source-group><doc-source requestId="32c449cf-04a7-4731-9ff8-92ce3a54646f" index="58" /><doc-source requestId="32c449cf-04a7-4731-9ff8-92ce3a54646f" index="59" /><doc-source requestId="32c449cf-04a7-4731-9ff8-92ce3a54646f" index="60" /></doc-source-group>
+- <strong>Truncation</strong>: When shrinking a number, high-order bits are simply discarded. For signed numbers, this may change the sign and the value significantly. <doc-source-group><doc-source requestId="32c449cf-04a7-4731-9ff8-92ce3a54646f" index="61" /><doc-source requestId="32c449cf-04a7-4731-9ff8-92ce3a54646f" index="62" /></doc-source-group>
+
+## 2. Integer Addition and Overflow
+- <strong>Unsigned Addition</strong>: Performed as modular arithmetic ($s = (u + v) \pmod{2^w}$). If the sum exceeds the bit capacity, the carry bit is dropped, resulting in a value smaller than the operands. <doc-source-group><doc-source requestId="32c449cf-04a7-4731-9ff8-92ce3a54646f" index="71" /><doc-source requestId="32c449cf-04a7-4731-9ff8-92ce3a54646f" index="79" /><doc-source requestId="32c449cf-04a7-4731-9ff8-92ce3a54646f" index="80" /></doc-source-group>
+- <strong>Two's Complement Addition</strong>: Interestingly, it uses the exact same bit-level hardware as unsigned addition. The difference lies in interpretation. <doc-source-group><doc-source requestId="32c449cf-04a7-4731-9ff8-92ce3a54646f" index="95" /><doc-source requestId="32c449cf-04a7-4731-9ff8-92ce3a54646f" index="97" /></doc-source-group>
+- <strong>Overflow Types</strong>:
+    - <strong>Positive Overflow</strong>: Adding two positive numbers results in a negative value (Sum > TMax).
+    - <strong>Negative Overflow</strong>: Adding two negative numbers results in a positive value (Sum < TMin). <doc-source-group><doc-source requestId="32c449cf-04a7-4731-9ff8-92ce3a54646f" index="110" /><doc-source requestId="32c449cf-04a7-4731-9ff8-92ce3a54646f" index="111" /><doc-source requestId="32c449cf-04a7-4731-9ff8-92ce3a54646f" index="129" /></doc-source-group>
+
+## 3. Multiplication and Shifting Optimizations
+- <strong>Multiplication</strong>: The lower $w$ bits of the product are the same for both signed and unsigned multiplication. Most modern processors use a single instruction for this. <doc-source-group><doc-source requestId="32c449cf-04a7-4731-9ff8-92ce3a54646f" index="159" /><doc-source requestId="32c449cf-04a7-4731-9ff8-92ce3a54646f" index="163" /></doc-source-group>
+- <strong>Shifting for Multiplication</strong>: Multiplying by a power of 2 ($2^k$) is equivalent to a left shift by $k$ ($x \ll k$). Compilers use combinations of shifts and adds/subs to avoid expensive `MUL` instructions (e.g., $x * 24$ becomes $(x \ll 5) - (x \ll 3)$). <doc-source-group><doc-source requestId="32c449cf-04a7-4731-9ff8-92ce3a54646f" index="169" /><doc-source requestId="32c449cf-04a7-4731-9ff8-92ce3a54646f" index="179" /><doc-source requestId="32c449cf-04a7-4731-9ff8-92ce3a54646f" index="183" /></doc-source-group>
+
+## 4. Division and Biasing
+- <strong>Unsigned Division</strong>: Performed using logical right shifts. <doc-source-group><doc-source requestId="32c449cf-04a7-4731-9ff8-92ce3a54646f" index="197" /><doc-source requestId="32c449cf-04a7-4731-9ff8-92ce3a54646f" index="201" /></doc-source-group>
+- <strong>Signed Division</strong>: Uses arithmetic right shifts. 
+    - <strong>The Problem</strong>: Right shifting negative numbers rounds toward $-\infty$ (e.g., $-12.5$ becomes $-13$), but C requires rounding toward zero ($-12.5$ should be $-12$).
+    - <strong>The Fix (Biasing)</strong>: Add a bias of $2^k - 1$ before shifting to ensure correct rounding for negative values. <doc-source-group><doc-source requestId="32c449cf-04a7-4731-9ff8-92ce3a54646f" index="209" /><doc-source requestId="32c449cf-04a7-4731-9ff8-92ce3a54646f" index="217" /><doc-source requestId="32c449cf-04a7-4731-9ff8-92ce3a54646f" index="222" /><doc-source requestId="32c449cf-04a7-4731-9ff8-92ce3a54646f" index="223" /></doc-source-group>
+
+## 5. Memory Organization and Endianness
+- <strong>Virtual Memory</strong>: Conceptually treated as a large array of bytes. Each process has its own virtual address space. <doc-source-group><doc-source requestId="32c449cf-04a7-4731-9ff8-92ce3a54646f" index="328" /><doc-source requestId="32c449cf-04a7-4731-9ff8-92ce3a54646f" index="333" /></doc-source-group>
+- <strong>Byte Ordering</strong>:
+    - <strong>Little-Endian</strong>: Least significant byte (LSB) at the lowest address (x86, ARM/Android/iOS).
+    - <strong>Big-Endian</strong>: Most significant byte (MSB) at the lowest address (Network protocols, some older systems). <doc-source-group><doc-source requestId="32c449cf-04a7-4731-9ff8-92ce3a54646f" index="358" /><doc-source requestId="32c449cf-04a7-4731-9ff8-92ce3a54646f" index="363" /><doc-source requestId="32c449cf-04a7-4731-9ff8-92ce3a54646f" index="365" /><doc-source requestId="32c449cf-04a7-4731-9ff8-92ce3a54646f" index="371" /></doc-source-group>
+- <strong>Strings and Pointers</strong>: Strings are null-terminated ASCII sequences (independent of endianness). Pointers are machine-dependent addresses (4 bytes for 32-bit, 8 bytes for 64-bit systems). <doc-source-group><doc-source requestId="32c449cf-04a7-4731-9ff8-92ce3a54646f" index="354" /><doc-source requestId="32c449cf-04a7-4731-9ff8-92ce3a54646f" index="385" /><doc-source requestId="32c449cf-04a7-4731-9ff8-92ce3a54646f" index="390" /></doc-source-group>
+
+## 6. Key Takeaways & Common Pitfalls
+- <strong>TMin Special Case</strong>: In Two's Complement, `-TMin` is still `TMin`. This often causes bugs in loops or absolute value functions. <doc-source-group><doc-source requestId="32c449cf-04a7-4731-9ff8-92ce3a54646f" index="264" /><doc-source requestId="32c449cf-04a7-4731-9ff8-92ce3a54646f" index="266" /></doc-source-group>
+- <strong>Comparison Hazards</strong>: Always be cautious when comparing `int` and `unsigned int` in C loops; an unsigned counter will never be less than zero, potentially causing infinite loops. <doc-source-group><doc-source requestId="32c449cf-04a7-4731-9ff8-92ce3a54646f" index="287" /><doc-source requestId="32c449cf-04a7-4731-9ff8-92ce3a54646f" index="310" /></doc-source-group>
